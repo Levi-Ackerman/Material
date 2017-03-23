@@ -1,5 +1,14 @@
 package top.lizhengxian.material;
 
+import android.os.Bundle;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -13,8 +22,23 @@ import me.yokeyword.fragmentation.SupportFragment;
  * *************************************************************
  *
  * @author Administrator
- * @date 2017/03/22
+ * 2017/03/22
  */
 
 public abstract class BaseFragment extends SupportFragment {
+    protected View mRootView;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        mRootView = inflater.inflate(getRootRes(), container, false);
+        ButterKnife.bind(this,mRootView);
+        initView(mRootView);
+        return mRootView;
+    }
+
+    protected abstract void initView(View rootView);
+
+    protected abstract @LayoutRes int getRootRes();
 }
