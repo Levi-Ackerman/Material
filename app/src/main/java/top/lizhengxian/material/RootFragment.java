@@ -1,5 +1,9 @@
 package top.lizhengxian.material;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,17 +32,16 @@ import butterknife.OnClick;
 
 public class RootFragment extends BaseFragment {
 
-    @BindView(R.id.btn)
-    protected Button mJumpButton;
-
     @BindView(R.id.toolbar)
     protected Toolbar mToolbar;
 
-    @BindView(R.id.contain)
-    protected ViewGroup mContentView;
-
     protected Drawer mDrawer;
 
+    @BindView(R.id.tablayout)
+    protected TabLayout mTabLayout;
+
+    @BindView(R.id.viewpager)
+    protected ViewPager mViewPager;
     @Override
     protected void initView(View rootView) {
         mDrawer = new DrawerBuilder()
@@ -53,11 +56,20 @@ public class RootFragment extends BaseFragment {
                     }
                 })
                 .build();
-    }
+        mTabLayout.addTab(mTabLayout.newTab().setText("推荐"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("发现"));
+        mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return new JumpedFragment();
+            }
 
-    @OnClick(R.id.btn)
-    protected void onClick() {
-        start(new JumpedFragment());
+            @Override
+            public int getCount() {
+                return 1;
+            }
+        });
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
