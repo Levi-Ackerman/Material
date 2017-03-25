@@ -1,7 +1,13 @@
 package top.lizhengxian.material;
 
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -17,25 +23,54 @@ import butterknife.OnClick;
  * *************************************************************
  *
  * @author Administrator
- *  2017/03/22
+ *         2017/03/22
  */
 
 public class RootFragment extends BaseFragment {
+
     @BindView(R.id.btn)
     protected Button mJumpButton;
 
+    @BindView(R.id.toolbar)
+    protected Toolbar mToolbar;
+
+    @BindView(R.id.contain)
+    protected ViewGroup mContentView;
+
+    protected Drawer mDrawer;
+
     @Override
     protected void initView(View rootView) {
-
+        mDrawer = new DrawerBuilder()
+                .withActivity(getActivity())
+                .withToolbar(mToolbar)
+                .withHeader(R.layout.drawer_header)
+                .inflateMenu(R.menu.drawer)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        return false;
+                    }
+                })
+                .build();
     }
 
     @OnClick(R.id.btn)
-    protected void onClick(){
+    protected void onClick() {
         start(new JumpedFragment());
     }
 
     @Override
     protected int getRootRes() {
         return R.layout.fragment_root;
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        if (mDrawer !=null && mDrawer.isDrawerOpen()){
+            mDrawer.closeDrawer();
+            return true;
+        }
+        return super.onBackPressedSupport();
     }
 }
