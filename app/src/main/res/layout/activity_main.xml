@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="top.lizhengxian.material.MainActivity">
+    tools:context="top.lizhengxian.material.home.HomeActivity">
 
     <FrameLayout
         android:id="@+id/contain"

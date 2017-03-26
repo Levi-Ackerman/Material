@@ -1,9 +1,10 @@
-package top.lizhengxian.material;
+package top.lizhengxian.material.core;
 
 import android.app.Application;
 
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
+import top.lizhengxian.material.BuildConfig;
 
 /**
  * ************************************************************

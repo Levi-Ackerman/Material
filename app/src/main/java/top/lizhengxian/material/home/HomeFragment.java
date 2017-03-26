@@ -1,25 +1,25 @@
-package top.lizhengxian.material;
+package top.lizhengxian.material.home;
 
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+import top.lizhengxian.material.R;
+import top.lizhengxian.material.core.BaseFragment;
 
 /**
  * ************************************************************
  * Copyright (C) 2005 - 2017 UCWeb Inc. All Rights Reserved
- * Description  :  top.lizhengxian.material.RootFragment.java
+ * Description  :  top.lizhengxian.material.HomeFragment.java
  * <p>
  * Creation     : 2017/3/22
  * Author       : zhengxian.lzx@alibaba-inc.com
@@ -30,7 +30,7 @@ import butterknife.OnClick;
  *         2017/03/22
  */
 
-public class RootFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.toolbar)
     protected Toolbar mToolbar;
@@ -42,6 +42,7 @@ public class RootFragment extends BaseFragment {
 
     @BindView(R.id.viewpager)
     protected ViewPager mViewPager;
+
     @Override
     protected void initView(View rootView) {
         mDrawer = new DrawerBuilder()
@@ -56,17 +57,30 @@ public class RootFragment extends BaseFragment {
                     }
                 })
                 .build();
-        mTabLayout.addTab(mTabLayout.newTab().setText("推荐"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("发现"));
+        mTabLayout.addTab(mTabLayout.newTab());
+        mTabLayout.addTab(mTabLayout.newTab());
+        mTabLayout.setTabTextColors(Color.GREEN,Color.YELLOW);
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                return new JumpedFragment();
+                if (position == 0)
+                    return new RecommandFragment();
+                if (position == 1)
+                    return new SectionFragment();
+                return null;
             }
 
             @Override
             public int getCount() {
-                return 1;
+                return 2;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                if(position == 0)
+                    return "推荐";
+                else
+                    return "分区";
             }
         });
         mTabLayout.setupWithViewPager(mViewPager);
@@ -74,12 +88,12 @@ public class RootFragment extends BaseFragment {
 
     @Override
     protected int getRootRes() {
-        return R.layout.fragment_root;
+        return R.layout.fragment_home;
     }
 
     @Override
     public boolean onBackPressedSupport() {
-        if (mDrawer !=null && mDrawer.isDrawerOpen()){
+        if (mDrawer != null && mDrawer.isDrawerOpen()) {
             mDrawer.closeDrawer();
             return true;
         }

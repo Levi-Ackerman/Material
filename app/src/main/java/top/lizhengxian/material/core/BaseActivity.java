@@ -1,4 +1,4 @@
-package top.lizhengxian.material;
+package top.lizhengxian.material.core;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
