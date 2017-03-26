@@ -45,6 +45,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView(View rootView) {
+        mToolbar.inflateMenu(R.menu.bar);
         mDrawer = new DrawerBuilder()
                 .withActivity(getActivity())
                 .withToolbar(mToolbar)
