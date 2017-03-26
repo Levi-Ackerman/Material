@@ -60,6 +60,7 @@ public class HomeFragment extends BaseFragment {
         mTabLayout.addTab(mTabLayout.newTab());
         mTabLayout.addTab(mTabLayout.newTab());
         mTabLayout.setTabTextColors(getResources().getColor(R.color.tabNormal),getResources().getColor(R.color.tabSelected));
+        mTabLayout.setSelectedTabIndicatorColor(Color.WHITE);
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
