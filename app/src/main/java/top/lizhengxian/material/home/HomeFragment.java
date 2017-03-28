@@ -13,6 +13,7 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import butterknife.BindView;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import top.lizhengxian.material.R;
 import top.lizhengxian.material.core.BaseFragment;
 
@@ -94,11 +95,17 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+    }
+
+    @Override
     public boolean onBackPressedSupport() {
         if (mDrawer != null && mDrawer.isDrawerOpen()) {
             mDrawer.closeDrawer();
             return true;
         }
-        return super.onBackPressedSupport();
+        return JCVideoPlayer.backPress() || super.onBackPressedSupport();
     }
 }
