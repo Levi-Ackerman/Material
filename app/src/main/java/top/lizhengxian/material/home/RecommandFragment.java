@@ -1,5 +1,6 @@
 package top.lizhengxian.material.home;
 
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.view.View;
 
@@ -35,6 +36,7 @@ public class RecommandFragment extends BaseFragment {
                 JCVideoPlayer.SCREEN_LAYOUT_NORMAL,"hello");
         mJCVideoPlayerStandard.thumbImageView.setImageURI(Uri.parse(
                 "http://www.aotu15.com/media/videos/tmb/000/005/372/player.jpg"));
+        JCVideoPlayerStandard.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
     }
 
     @Override
