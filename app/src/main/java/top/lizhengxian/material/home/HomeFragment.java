@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.mikepenz.materialdrawer.Drawer;
@@ -47,6 +48,12 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initView(View rootView) {
         mToolbar.inflateMenu(R.menu.bar);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return true;
+            }
+        });
         mDrawer = new DrawerBuilder()
                 .withActivity(getActivity())
                 .withToolbar(mToolbar)
